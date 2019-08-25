@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function(){
             play(e);
         }
     });
-    document.addEventListener('keydown', function(e){  
+    document.addEventListener('keydown', function(e){   
         for( i in keys){ 
             if ( 'Key' + keys[i]['key'] === e.code ){ 
                 play( keys[i]['audio'] );
@@ -31,15 +31,29 @@ document.addEventListener('DOMContentLoaded', function(){
         };  
     }); 
     function play(e){ 
-        if( !e.target ){
-            console.log('ok');
-            for ( i in drumKit.children ){ 
-                if ( drumKit.children[i].src === url + e + '.ogg' ) {
-                    drumKit.children[i].play(); 
+
+        if( !e.target ){   
+
+            for ( i in drumKit.children){   
+                
+                if( drumKit.children[i].className === 'audio'){
+
+                    var source = drumKit.children[i].src;
+                        
+                    if ( source.substring( source.lastIndexOf('/') + 1 ) === e + '.ogg') {
+                        
+                        drumKit.children[i].play(); 
+
+                    }
+
                 }
+
             }  
+
         } else {
+
             e.target.nextElementSibling.play();
+
         }
     }
 });
